@@ -9,10 +9,25 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.17.2",
+    "@react-native-community/geolocation": "^3.0.3",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.2",
+    "@react-navigation/stack": "^6.3.4",
     "expo": "~47.0.6",
+    "expo-location": "~15.0.1",
     "expo-status-bar": "~1.4.2",
+    "load-url": "^1.0.2",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-dom": "^18.1.0",
+    "react-native": "0.70.5",
+    "react-native-app-intro-slider": "^4.0.4",
+    "react-native-gesture-handler": "^2.8.0",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-screens": "^3.18.2",
+    "react-native-web": "^0.18.10",
+    "react-native-webview": "^11.25.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
