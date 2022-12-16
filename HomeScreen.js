@@ -3,33 +3,43 @@ import { ActivityIndicator,Pressable, Text, View, StyleSheet } from 'react-nativ
 import * as Location from 'expo-location';
 import * as Battery from "expo-battery";
 import * as Device from "expo-device";
-
+import * as Network from 'expo-network'
 // import Svg, { Path, Rect } from "react-native-svg";
 export default function HomeScreen({navigation}) {
   
   const [errorMsg, setErrorMsg] = useState(null);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState("");
   const [dataitems, setdataitems] = useState(null);
    const [level, setLevel] = useState(0);
   const [model,setModel]=useState(null);
   const [brand,setBrand]=useState(null);
   const [opera,setOpera]=useState(null);
   const [operav,setOperav]=useState(null);
+  const [ippadd,setIppadd]=useState(null);
+  const [internet,setInternet]=useState(null);
+  const [response, setResponse] = useState()
+  useEffect(() => {
+    handleNetwork()
+  }, [])
+
+  async function handleNetwork() {
+    const { isInternetReachable } = await Network.getNetworkStateAsync();
+    setResponse(isInternetReachable)
+  }
   // var datetime=moment().utcOffset('+05:30').format('hh:mm:ss a')
   // const [time,setTime]=useState(datetime);
-  
   var batte=parseInt(level*100)
-  
- 
-
   useEffect(() => {
     (async () => {
       const currentLevel = await Battery.getBatteryLevelAsync();
       setLevel(currentLevel);
-     
+      const ipadd= await Network.getIpAddressAsync();
+    setIppadd(ipadd);
+   
     })();
 
-
+    const internett=Network.getNetworkStateAsync({});
+    setInternet(internett);
     const devicemodel=()=>{
       setBrand(Device.manufacturer)
       setModel(Device.osVersion)
@@ -42,7 +52,7 @@ export default function HomeScreen({navigation}) {
       setLevel(batteryLevel)
     
     );
-    return () => subscription.remove();
+    return () => subscription.remove()
   }, []);
   useEffect(() => {
     (async () => {
@@ -54,10 +64,14 @@ export default function HomeScreen({navigation}) {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location.coords);
+   
+      const abcd=setInterval(()=>{
+        setLocation(location.coords);
+      },2000);
+     
       let dataitems = await Location.reverseGeocodeAsync(location.coords);
       setdataitems(dataitems.reduce(e => e))
-      
+      return()=> clearInterval(abcd);
     })();
   }, []);
 
@@ -116,6 +130,8 @@ export default function HomeScreen({navigation}) {
       <Text style={styles.dataitems}>OS Version : {model}</Text>
       <Text style={styles.dataitems}>Model : {operav}</Text>
       <Text style={styles.dataitems}>Brand : {brand}</Text>
+      <Text style={styles.dataitems}>IP Address : {ippadd}</Text>
+      <Text style={styles.dataitems}>Internet : { JSON.stringify(response)}</Text>
       <Text style={styles.dataitems}>Device Battery : {batte}% <View style={styles.batt}>
         <View style={styles.batt2}></View>
         </View></Text>  
@@ -197,17 +213,17 @@ const styles = StyleSheet.create({
   },
   locatext:{
     marginVertical: 5,
-    fontSize:25,
+    fontSize:21,
     fontWeight: '700'
   },
   buttn:{
     width:200,   
-    marginTop:30,
+    marginTop:10,
     paddingVertical:10, 
   },
   buttn2:{
 flexDirection:'row',
-marginVertical:20,
+marginVertical:10,
   },
   txt1:{
     color:'white',
