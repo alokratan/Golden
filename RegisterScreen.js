@@ -2,23 +2,24 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View,KeyboardAvoidingView,Pressable, TextInput } from 'react-native';
 import { auth } from './firebase-config';
-import {signInWithEmailAndPassword} from  "firebase/auth"
+import {createUserWithEmailAndPassword} from  "firebase/auth"
 export default function RegisterScreen({navigation}) {
  const [email,setEmail]=useState('');
  const [password,setPassword]=useState('');
  
-const handleSignIn= async ()=>{
-    await signInWithEmailAndPassword(auth,email,password)
+const handleSignUp= async ()=>{
+    await createUserWithEmailAndPassword(auth,email,password)
     .then((userCredential)=>{
       
     // alert('LOGIN SUCCESSFULLY...')
-        console.log("login successfully.... your email address is =>",email)
-       navigation.replace('GOLDEN')
+        console.log("Created successfully.... your email address is =>",email,"password is:", password)
+       
+       alert('Congratulations, Account Created Successfully:',email);
     })
     .catch(err=>{
-      // alert('ACCESS DENIED',err)
-      console.log("login faild",email)
-      alert('invalid credential...');
+   
+      console.log("signup faild",email)
+      alert('Invalid Credentials....');
     })
 }
   return (
@@ -47,14 +48,14 @@ const handleSignIn= async ()=>{
     <View style={styles.buttn}>
 
 <Pressable
-onPress={handleSignIn }
+onPress={handleSignUp }
 
 ><Text style={styles.txt1}>
 REGISTER 
    </Text>
 </Pressable>
 <Pressable 
- onPress={()=>navigation.navigate('GOLDENEYE')}
+ onPress={()=>navigation.navigate('Login')}
  >
 <Text style={styles.txt2}>
      LOGIN
@@ -114,7 +115,7 @@ borderRadius:25,
     paddingVertical:12,
     paddingHorizontal:20,
     textAlign:"center",
-    backgroundColor:'#ffffff',
+    // backgroundColor:'#ffffff',
     borderRadius:5,
     fontWeight:'500',
     marginHorizontal:10,

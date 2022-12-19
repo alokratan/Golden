@@ -15,7 +15,7 @@ export default function HomeScreen({navigation}) {
   const [brand,setBrand]=useState(null);
   const [opera,setOpera]=useState(null);
   const [operav,setOperav]=useState(null);
-  const [ippadd,setIppadd]=useState(null);
+  const [ippadd,setIppadd]=useState('');
   const [internet,setInternet]=useState(null);
   const [response, setResponse] = useState()
   useEffect(() => {
@@ -35,6 +35,7 @@ export default function HomeScreen({navigation}) {
       setLevel(currentLevel);
       const ipadd= await Network.getIpAddressAsync();
     setIppadd(ipadd);
+   
    
     })();
 
@@ -78,7 +79,7 @@ export default function HomeScreen({navigation}) {
 
 
   
-  let text = <ActivityIndicator style={styles.indi} size={50} color="black"/>
+  let text; 
   let text2;
   let cityname;
   let countryname;
@@ -174,6 +175,13 @@ export default function HomeScreen({navigation}) {
             Register
           </Text>
       </Pressable>
+      <Pressable
+        onPress={ () => navigation.navigate('Otpfir')
+        }>
+       <Text style={styles.txt3}>
+            OTP
+          </Text>
+      </Pressable>
       
      
 </View>
@@ -193,12 +201,12 @@ const styles = StyleSheet.create({
   },
   dataitemclass:{
     width:'90%',
-    marginVertical:20,
+    marginVertical:10,
 
   },
   paragraph: {
     fontSize: 20,
-    marginTop: 22,
+    marginTop: 21,
     textAlign: 'left',
     fontWeight: '700'
     
@@ -260,18 +268,6 @@ marginVertical:10,
    padding:5,
    marginLeft:10,
   }
-  // batt:{
-  //   backgroundColor:'red',
-  //   width:60,
-  //   height:20,
-  //   borderWidth:2,
-  // },
-  // batt2:{
-  //   backgroundColor:'blue',
-  //   width:battee,
-  //   height:20,
-  //   borderWidth:2,
-  // }
-  
+
 
 });

@@ -10,7 +10,7 @@ export default function LoginScreen({navigation}) {
  
 const handleSignIn= async ()=>{
     await signInWithEmailAndPassword(auth,email,password)
-    .then((userCredential)=>{
+    .then(()=>{
       
     // alert('LOGIN SUCCESSFULLY...')
         console.log("login successfully.... your email address is =>",email)
@@ -19,7 +19,7 @@ const handleSignIn= async ()=>{
     .catch(err=>{
       // alert('ACCESS DENIED',err)
       console.log("login faild",email)
-      alert('invalid credential...');
+      alert('invalid credential...',);
     })
 }
 
@@ -56,7 +56,7 @@ onPress={handleSignIn }
    </Text>
 </Pressable>
 <Pressable 
- onPress={()=>navigation.navigate('GOLDENEYE')}
+ onPress={()=>navigation.navigate('Register')}
  >
 <Text style={styles.txt2}>
      REGISTER
