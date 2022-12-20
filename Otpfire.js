@@ -96,6 +96,7 @@ export default function PhoneAuthScreen({navigation}) {
           style={styles.textInput}
           // editable={!!verificationId}
           placeholder="123456"
+          keyboardType="phone-pad"
           onChangeText={setVerificationCode}
         />
         <Button
@@ -113,7 +114,7 @@ export default function PhoneAuthScreen({navigation}) {
               setVerificationId('');
               setVerificationCode('');
               verificationCodeTextInput.current?.clear();
-              navigation.navigate('GOLDEN')
+              navigation.navigate('Welcome')
             } catch (err) {
               setConfirmError(err);
               setConfirmInProgress(false);
@@ -207,3 +208,4 @@ const styles = StyleSheet.create({
   backgroundColor:'blue'
  }
 });
+
