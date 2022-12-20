@@ -9,6 +9,7 @@ import RegisterScreen from './RegisterScreen';
 import Camera from './Camera';
 
 import Otpfire from './Otpfire';
+import Welcome from './Welcome';
 
 const Stack = createNativeStackNavigator();
 function Screens() {
@@ -20,6 +21,7 @@ function Screens() {
        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} /> 
         <Stack.Screen name="GOLDEN" component={Apiscreen} />
+        <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Camera" component={Camera} />
         <Stack.Screen name="Otpfir" options={{ title: 'OTP Verification',headerTitleStyle:{
           fontWeight:'900'
