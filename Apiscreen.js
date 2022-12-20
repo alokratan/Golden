@@ -7,7 +7,7 @@ export default function Apiscreen() {
   useEffect(() => {
 
     const getdata = async () => {
-      const abcd = await axios.get("https://jsonplaceholder.typicode.com/albums");
+      const abcd = await axios.get("http://13.126.41.109:8000/api/register/");
       setUser(abcd.data)
     }
     getdata();
@@ -67,3 +67,4 @@ const styles = StyleSheet.create({
   }
 
 });
+
